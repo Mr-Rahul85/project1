@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Takhat sri harimandir ji patna sahib</title>
+    <link rel="stylesheet" href="../css/style5.css" />
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <img src="../assets/logo2.png" alt="logo" class="logo" />
+        <ul>
+          <li><a href="index.html" class="content">Home</a></li>
+          <li><a href="#" class="content">About</a></li>
+          <li><a href="#" class="content">Services</a></li>
+          <li><a href="#" class="content">Contact</a></li>
+          <li><a href="#" class="content">Pricing</a></li>
+        </ul>
+      </nav>
+    </div>
+    <main>
+      <h2 class="dp">Takhat Sri Harimandir Ji Patna Sahib</h2>
+      <div style="display: flex">
+        <img
+          src="../assets/patna-saheb2.jpeg"
+          alt="takhat sri harimandir ji patna sahib"
+          class="photo" />
+        <div class="important">
+          <div class="weather-card">
+            <h1 id="location">Patna</h1>
+            <p id="condition">Few Clouds</p>
+            <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon">
+            <p id="temperature">31.4°C</p>
+            <div class="details">
+                <div><span>Feels Like</span><span id="feels-like">32.3°C</span></div>
+                <div><span>Wind</span><span id="wind">2.18 m/s</span></div>
+                <div><span>Pressure</span><span id="pressure">1011 hPa</span></div>
+            </div>
+        </div>
+        </div>
+      </div>
+      <div class="info">
+        <p>
+          TAKHAT SRI HARIMANDIR JI PATNA SAHIB is considered the second holiest
+          Takhat. Revered as the birthplace of Sri Guru Gobind Singh Ji Maharaj,
+          it is one of the five seats of temporal authority of the Sikhs and has
+          been consecrated by three Sikh Gurus.
+        </p>
+        <p>
+          A symbol of valour and fearlessness, the shrine inspires great piety
+          in pilgrims and holds pride of place in the glorious heritage of Patna
+          City. Takhat Sri Harimandir Sahib Ji also known as Patna Sahib.
+        </p>
+      </div>
+      <div class="photo-album">
+        <div class="gallery">
+          <img src="../assets/img1.jpeg" alt="Image 1">
+          <img src="../assets/img2.jpeg" alt="Image 2">
+          <img src="../assets/img3.jpeg" alt="Image 3">
+          <img src="../assets/img4.jpeg" alt="Image 4">
+          <img src="../assets/img5.jpeg" alt="Image 5">
+          <img src="../assets/img6.jpeg" alt="Image 6">
+          <img src="../assets/img7.jpeg" alt="Image 7">
+          <img src="../assets/img8.jpeg" alt="Image 8">
+          <img src="../assets/img9.jpeg" alt="Image 9">
+          <img src="../assets/img10.jpeg" alt="Image 10">
+          <img src="../assets/img11.jpeg" alt="Image 11">
+          <img src="../assets/img12.jpeg" alt="Image 12">
+          <img src="../assets/img13.jpeg" alt="Image 13">
+          <img src="../assets/img14.jpeg" alt="Image 14">
+          <img src="../assets/img15.jpeg" alt="Image 15">
+          <img src="../assets/img16.jpeg" alt="Image 16">
+          <img src="../assets/img17.jpeg" alt="Image 17">
+          <img src="../assets/img18.jpeg" alt="Image 18">
+          <img src="../assets/img19.jpeg" alt="Image 19">
+          <img src="../assets/img20.jpeg" alt="Image 20">
+          <img src="../assets/img21.jpeg" alt="Image 21">
+          <img src="../assets/img22.jpeg" alt="Image 22">
+
+
+      </div>
+      </div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1464.9049807812!2d85.22900380763737!3d25.596144706859477!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed586fffffffff%3A0x4ce78ec58719403d!2sTakhat%20Shri%20Harimandir%20Ji%20Patna%20Sahib!5e1!3m2!1sen!2sin!4v1741009273454!5m2!1sen!2sin"
+        width="800"
+        height="600"
+        style="border: 0; margin-left: 60px; margin-top: 50px"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </main>
+    <footer>
+      <div class="footer">
+        <div class="for-logo">
+          <img src="../assets/logo2.png" alt="logo" />
+          <p>
+            We always make our customer happy by providing as many choices as
+            possible
+          </p>
+        </div>
+        <div class="about-section">
+          <h2>About</h2>
+          <a href="">About Us</a>
+          <a href="">Features</a>
+          <a href="">News</a>
+          <a href="">Menu</a>
+        </div>
+        <div class="company-section">
+          <h2>Company</h2>
+          <a href="">Why Company</a>
+          <a href="">Partner With Us</a>
+          <a href="">FAQ</a>
+          <a href="">Blog</a>
+        </div>
+        <div class="support-section">
+          <h2>Support</h2>
+          <a href="">Account</a>
+          <a href="">Support Center</a>
+          <a href="">Feedback</a>
+          <a href="">Contact Us</a>
+          <a href="">Accessibility</a>
+        </div>
+        <div class="getInTouch">
+          <h2>Get in Touch</h2>
+          <p>Question or feedback? We'd love to hear from you.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const apiKey = '8788a4bbbf4e4a3970644db63744121d'; 
+      const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
+
+      async function fetchWeather() {
+          const location = 'Patna,India';
+          try {
+              const response = await fetch(`${apiUrl}?q=${location}&appid=${apiKey}&units=metric`);
+              const data = await response.json();
+
+              if (data.cod === 200) {
+                  document.getElementById('location').textContent = data.name;
+                  document.getElementById('condition').textContent = data.weather[0].description;
+                  document.getElementById('temperature').textContent = `${data.main.temp}°C`;
+                  document.getElementById('feels-like').textContent = `${data.main.feels_like}°C`;
+                  document.getElementById('wind').textContent = `${data.wind.speed} m/s`;
+                  document.getElementById('pressure').textContent = `${data.main.pressure} hPa`;
+                  document.getElementById('weather-icon').src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+              } else {
+                  alert('Location not found! Please try again.');
+              }
+          } catch (error) {
+              console.error('Error fetching weather data:', error);
+              alert('Error fetching weather data. Check console for details.');
+          }
+      }
+
+      
+      window.onload = fetchWeather;
+  </script>
+  </body>
+</html>

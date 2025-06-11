@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Videos</title>
+    <style>
+      .body {
+        background-color: rgb(110, 109, 109);
+        background-color: black;
+      }
+      .video-editor {
+        width: 400px;
+        height: 750px;
+        margin-left: 35rem;
+      }
+      .controls {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 32rem;
+
+        margin-top: -25rem;
+        align-items: center;
+      }
+      button {
+        border: none;
+        cursor: pointer;
+
+        background-color: transparent;
+        color: white;
+      }
+      img {
+        width: 2rem;
+        height: 2rem;
+      }
+      #nextBtn {
+        position: absolute;
+        left: 61rem;
+      }
+      button:disabled {
+        background-color: transparent;
+        cursor: not-allowed;
+      }
+      button:hover {
+        background-color: rgb(226, 226, 226);
+      }
+    </style>
+  </head>
+  <body>
+    <video class="video-editor" id="videoPlayer" controls  autoplay>
+      <source type="video/mp4" src="../assets/video1.mp4" />
+    </video>
+    <div class="controls">
+      <button id="prevBtn" onclick="prevVideo()">
+        <img src="../assets/back.png" alt="back" />
+      </button>
+      <button id="nextBtn" onclick="nextVideo()">
+        <img src="../assets/next.png" alt="next" />
+      </button>
+    </div>
+
+    <script>
+      // List of video sources
+      const videos = [
+        "../assets/video1.mp4",
+        "../assets/video2.mp4",
+        "../assets/video6.mp4",
+        "../assets/video4.mp4",
+        "../assets/rohtas.mp4",
+        "../assets/video9.mp4",
+        "../assets/video3.mp4",
+        "../assets/video7.mp4",
+        "video8.mp4",
+        "../assets/video5.mp4",
+      ];
+      let currentVideoIndex = 0;
+
+      const videoPlayer = document.getElementById("videoPlayer");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      // Update the video source
+      function updateVideo() {
+        videoPlayer.src = videos[currentVideoIndex];
+        videoPlayer.play();
+        updateButtons();
+      }
+
+      // Enable or disable buttons
+      function updateButtons() {
+        prevBtn.disabled = currentVideoIndex === 0;
+        nextBtn.disabled = currentVideoIndex === videos.length - 1;
+      }
+
+      // Go to the previous video
+      function prevVideo() {
+        if (currentVideoIndex > 0) {
+          currentVideoIndex--;
+          updateVideo();
+        }
+      }
+
+      // Go to the next video
+      function nextVideo() {
+        if (currentVideoIndex < videos.length - 1) {
+          currentVideoIndex++;
+          updateVideo();
+        }
+      }
+
+      // Initialize buttons on load
+      updateButtons();
+    </script>
+  </body>
+</html>

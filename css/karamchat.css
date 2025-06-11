@@ -1,0 +1,195 @@
+* {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      background-color: rgb(216, 230, 232);
+      height: 8em;
+      width: 100%;
+    }
+    nav {
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      width: 180px;
+      height: 60px;
+      cursor: pointer;
+      margin-left: 3rem;
+      margin-top: 1.5rem;
+    }
+    nav ul {
+      list-style: none;
+      width: 100%;
+      margin-top: 1.5rem;
+      margin-left: 2em;
+      text-align: right;
+      padding-right: 60px;
+    }
+    nav ul li {
+      display: inline-block;
+      margin: 1rem 2rem;
+    }
+    nav ul li a {
+      color: #000000;
+      text-decoration: none;
+      font-size: 25px;
+    }
+    .content:hover {
+      text-decoration: underline;
+      color: rgb(235, 8, 69);
+    }
+    .dp {
+      font-family: "Prata", serif;
+      font-size: 30px;
+      padding-top: 40px;
+      padding-left: 80px;
+    }
+    .photo {
+      width: 920px;
+      height: 624px;
+      border-radius: 25px;
+      margin-left: 50px;
+      margin-top: 20px;
+    }
+    .important {
+      height: 524px;
+      width: 400px;
+      background-color: rgb(240, 243, 246);
+      margin-top: 20px;
+      margin-left: 55px;
+      border-radius: 20px;
+    }
+    .weather-card {
+      background: #f0f8ff;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 360px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      font-family: Arial, sans-serif;
+  }
+  .weather-card h1 {
+      font-size: 24px;
+      margin: 0;
+  }
+  .weather-card p {
+      margin: 5px 0;
+  }
+  .weather-card .details {
+      text-align: left;
+      margin-top: 10px;
+  }
+  .weather-card .details div {
+      display: flex;
+      justify-content: space-between;
+      margin: 5px 0;
+  }
+  .weather-icon {
+      width: 50px;
+      height: 50px;
+  }
+    .info {
+      width: 90%;
+      height: 500px;
+      margin-left: 50px;
+      margin-top: 50px;
+      margin-bottom: 40px;
+      border-radius: 20px;
+      background-color: rgb(240, 243, 246);
+      padding: 10px;
+    }
+    .info p {
+      font-size: 30px;
+      font-weight: 50;
+    }
+    .photo-album {
+      width: 92%;
+      height: 500px;
+      background-color: rgb(70, 73, 76);
+      margin-left: 60px;
+    }
+    /* footer services */
+    .footer {
+      height: 20rem;
+      background-color: rgb(45, 42, 42);
+      width: 100%;
+      display: flex;
+      margin-top: 10px;
+    }
+    .footer h2{
+          align-items: center;
+    }
+    .for-logo {
+      text-decoration: none;
+      width: 20rem;
+      padding-left: 20px;
+      margin: 1rem;
+      display: grid;
+      font-size: 1.4rem;
+      height: 18rem;
+      background-color: blue;
+    }
+    
+    .about-section {
+      text-decoration: none;
+      width: 15rem;
+      padding-left: 20px;
+      margin: 1rem;
+      display: grid;
+      font-size: 1.4rem;
+      height: 18rem;
+      background-color: blue;
+    }
+    .about-section a {
+      text-decoration: none;
+      color: rgb(157, 157, 157);
+    }
+    .company-section {
+      text-decoration: none;
+      width: 15rem;
+      margin: 1rem;
+      display: grid;
+      padding-left: 20px;
+      font-size: 1.4rem;
+      height: 18rem;
+      background-color: blue;
+    }
+    .company-section a {
+      text-decoration: none;
+      color: rgb(157, 157, 157);
+    }
+    .support-section {
+      text-decoration: none;
+      width: 15rem;
+      margin: 1rem;
+      display: grid;
+      padding-left: 20px;
+      font-size: 1.4rem;
+      height: 18rem;
+      background-color: blue;
+    }
+    .support-section a {
+      text-decoration: none;
+      color: rgb(157, 157, 157);
+    }
+    .getInTouch {
+      text-decoration: none;
+      width: 15rem;
+      margin: 1rem;
+      display: grid;
+      padding-left: 20px;
+      font-size: 1.4rem;
+      height: 18rem;
+      background-color: blue;
+    }
+    .getInTouch a {
+      text-decoration: none;
+      color: rgb(157, 157, 157);
+    }
+    .footer a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    

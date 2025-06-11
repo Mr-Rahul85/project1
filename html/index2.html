@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/style4.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container" id="signIn">
+      <h1 class="form-title">Login</h1>
+      <form method="POST" id="signInForm" action="insert.php">
+        <div class="input-group">
+          <i class="fas fa-envelope"></i>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email"
+            required />
+          <label for="email">Email</label>
+        </div>
+        <div class="input-group">
+          <i class="fas fa-lock"></i>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            required />
+          <label for="password">Password</label>
+        </div>
+        <p class="recover"><a href="#">Recover Password</a></p>
+        <input type="submit" class="btn" value="Login" name="Login" />
+      </form>
+      <p class="or">--------or--------</p>
+      <div class="icons">
+        <i class="fab fa-google"></i>
+        <i class="fab fa-facebook"></i>
+      </div>
+      <div class="links">
+        <p>Don't have account yet?</p>
+        <button id="signUpButton">
+          <a href="signup.html" style="text-decoration: none"> Sign Up</a>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

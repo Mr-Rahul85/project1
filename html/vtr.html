@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../css/style5.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <img src="../assets/logo2.png" alt="logo" class="logo" />
+        <ul>
+          <li><a href="index.html" class="content">Home</a></li>
+          <li><a href="#" class="content">About</a></li>
+          <li><a href="#" class="content">Services</a></li>
+          <li><a href="#" class="content">Contact</a></li>
+          <li><a href="#" class="content">Pricing</a></li>
+        </ul>
+      </nav>
+    </div>
+    <main>
+      <h2 class="dp">Valmiki Tiger Reserve</h2>
+      <div style="display: flex">
+        <img
+          src="../assets/vtr2.jpeg"
+          alt="Valmiki Tiger Reserve"
+          class="photo" />
+        <div class="important">
+          <div class="weather-card">
+            <h1 id="location">West Champaran</h1>
+            <p id="condition">Few Clouds</p>
+            <img
+              id="weather-icon"
+              class="weather-icon"
+              src=""
+              alt="Weather Icon" />
+            <p id="temperature">31.4°C</p>
+            <div class="details">
+              <div>
+                <span>Feels Like</span><span id="feels-like">32.3°C</span>
+              </div>
+              <div><span>Wind</span><span id="wind">2.18 m/s</span></div>
+              <div>
+                <span>Pressure</span><span id="pressure">1011 hPa</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info">
+        <p>
+          Valmiki Tiger Reserve forms the eastern most limit of the Himalayan
+          Terai forests in India and is the only tiger reserve of Bihar.
+          Situated in the Gangetic Plains bio-geographic zone of the country,
+          the forest has combination of bhabar and terai tracts. Valmiki Tiger
+          Reserve lies in the north-western (mostly in the West Champaran)
+          district of Bihar. Name of the district has been derived from two
+          words Champa and Aranya meaning Forest of Champa trees.
+        </p>
+        <p>
+          Sanctuary is reported to shelter of 250 species of birds 53 mammals,
+          145 birds, 26 reptile and 13 amphibians and Tiger Reserve.
+        </p>
+      </div>
+      <div class="photo-album"></div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d890922.4280958192!2d83.83856339211663!3d26.873505837426436!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39943f26fafe879f%3A0x3b1c705682cb2c40!2sValmiki%20Tiger%20Reserve!5e1!3m2!1sen!2sin!4v1744647213996!5m2!1sen!2sin"
+        width="800"
+        height="600"
+        style="border: 0; margin-left: 60px; margin-top: 50px";
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </main>
+    <footer>
+      <div class="footer">
+        <div class="for-logo">
+          <img src="../assets/logo2.png" alt="logo" />
+          <p>
+            We always make our customer happy by providing as many choices as
+            possible
+          </p>
+        </div>
+        <div class="about-section">
+          <h2>About</h2>
+          <a href="">About Us</a>
+          <a href="">Features</a>
+          <a href="">News</a>
+          <a href="">Menu</a>
+        </div>
+        <div class="company-section">
+          <h2>Company</h2>
+          <a href="">Why Company</a>
+          <a href="">Partner With Us</a>
+          <a href="">FAQ</a>
+          <a href="">Blog</a>
+        </div>
+        <div class="support-section">
+          <h2>Support</h2>
+          <a href="">Account</a>
+          <a href="">Support Center</a>
+          <a href="">Feedback</a>
+          <a href="">Contact Us</a>
+          <a href="">Accessibility</a>
+        </div>
+        <div class="getInTouch">
+          <h2>Get in Touch</h2>
+          <p>Question or feedback? We'd love to hear from you.</p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      const apiKey = "8788a4bbbf4e4a3970644db63744121d";
+      const apiUrl = "https://api.openweathermap.org/data/2.5/weather";
+
+      async function fetchWeather() {
+        const location = "Bettiah,India";
+        try {
+          const response = await fetch(
+            `${apiUrl}?q=${location}&appid=${apiKey}&units=metric`
+          );
+          const data = await response.json();
+
+          if (data.cod === 200) {
+            // document.getElementById('location').textContent = data.name;
+            document.getElementById("condition").textContent =
+              data.weather[0].description;
+            document.getElementById(
+              "temperature"
+            ).textContent = `${data.main.temp}°C`;
+            document.getElementById(
+              "feels-like"
+            ).textContent = `${data.main.feels_like}°C`;
+            document.getElementById(
+              "wind"
+            ).textContent = `${data.wind.speed} m/s`;
+            document.getElementById(
+              "pressure"
+            ).textContent = `${data.main.pressure} hPa`;
+            document.getElementById(
+              "weather-icon"
+            ).src = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+          } else {
+            alert("Location not found! Please try again.");
+          }
+        } catch (error) {
+          console.error("Error fetching weather data:", error);
+          alert("Error fetching weather data. Check console for details.");
+        }
+      }
+
+      window.onload = fetchWeather;
+    </script>
+  </body>
+</html>
