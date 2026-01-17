@@ -1,0 +1,221 @@
+.page-center {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center; /* center vertically */
+}
+
+.feedback-card {
+  background: #fff;
+  padding: 35px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p.subtitle {
+  color: #555;
+  margin-bottom: 25px;
+}
+
+/* Feedback Type */
+.radio-group {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.radio-group label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Rating */
+.stars {
+  font-size: 25px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.stars span {
+  color: #ccc;
+}
+
+.stars span.active {
+  color: gold;
+}
+
+.emoji {
+  font-size: 30px;
+  margin: 10px 0 20px;
+}
+
+/* Message */
+/* Common form style */
+.form-control {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #f9fafb;
+  outline: none;
+  transition: all 0.2s ease;
+  margin-bottom: 15px;
+  font-family: inherit;
+}
+
+/* Textarea specific */
+textarea.form-control {
+  resize: none;
+  min-height: 100px;
+}
+
+/* Focus effect */
+.form-control:focus {
+  border-color: #2563eb;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* Placeholder */
+.form-control::placeholder {
+  color: #9ca3af;
+}
+
+/* File input fix */
+.file-input {
+  padding: 9px;
+  cursor: pointer;
+}
+
+/* Style file button (Chrome / Edge) */
+.file-input::file-selector-button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-size: 13px;
+}
+
+.file-input::file-selector-button:hover {
+  background: #1e40af;
+}
+
+/* Counter improvement */
+.counter {
+  text-align: right;
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+/* Button */
+button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  width: 100%;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1e40af;
+}
+
+/* Success */
+.success {
+  animation: pop 0.5s ease;
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@media (max-width: 480px) {
+  /* Page padding so card doesn't touch edges */
+  .page-center {
+    padding: 15px;
+    align-items: flex-start;
+  }
+
+  /* Card adjustments */
+  .feedback-card {
+    padding: 22px;
+    max-width: 100%;
+    border-radius: 8px;
+  }
+
+  /* Heading */
+  h2 {
+    font-size: 20px;
+  }
+
+  p.subtitle {
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+
+  /* Radio buttons */
+  .radio-group label {
+    font-size: 14px;
+  }
+
+  /* Stars */
+  .stars {
+    font-size: 22px;
+  }
+
+  .emoji {
+    font-size: 26px;
+    margin-bottom: 15px;
+  }
+
+  /* Form inputs */
+  .form-control {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  textarea.form-control {
+    min-height: 90px;
+  }
+
+  /* Counter */
+  .counter {
+    font-size: 11px;
+  }
+
+  /* File upload button */
+  .file-input::file-selector-button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  /* Submit button */
+  button {
+    padding: 11px;
+    font-size: 15px;
+  }
+}

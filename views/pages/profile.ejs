@@ -1,0 +1,105 @@
+<div class="profile-scope">
+  <div class="profile-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div>
+        <div class="user-box">
+          <img src="<%= user.photo %>" alt="user-image" />
+          <h3><%= user.username %></h3>
+        </div>
+
+        <div class="menu">
+          <button class="tab-btn active" data-tab="profile">Profile</button>
+          <button class="tab-btn" data-tab="favorites">
+            Favorite Destinations
+          </button>
+          <button class="tab-btn" data-tab="trips">Trips</button>
+        </div>
+      </div>
+
+      <form action="/api/auth/logout" method="POST">
+        <button type="submit" class="logout">Logout</button>
+      </form>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+      <!-- PROFILE -->
+      <div class="tab-content active" id="profile">
+        <div class="card">
+          <h2>Personal Information</h2>
+
+          <div class="grid">
+            <div>
+              <label>Name</label>
+              <input value="<%= user.username %>" disabled />
+            </div>
+            <div>
+              <label>Email</label>
+              <input value="<%= user.email %>" disabled />
+            </div>
+            <div>
+              <label>Phone</label>
+              <input value="<%= user.phone %>" disabled />
+            </div>
+          </div>
+
+          <h2 style="margin-top: 30px">About</h2>
+          <textarea disabled><%= user.about %></textarea>
+
+          <div class="actions">
+            <button class="edit" id="editBtn">Edit</button>
+            <button class="save" id="saveBtn" disabled>Save</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAVORITES -->
+      <div class="tab-content" id="favorites">
+        <div class="card">
+          <h2>Favorite Destinations</h2>
+
+          <% if (user?.wishlist?.length > 0) { %>
+          <div class="favorites-grid">
+            <% user.wishlist.forEach(card => { %>
+            <a href="/all-destination/<%- card.name %>" class="card">
+              <div class="place-card">
+                <svg
+                  class="wishlist-heart active"
+                  data-id="<%= card._id %>"
+                  viewBox="0 0 24 24"
+                  aria-label="Save destination"
+                  role="button">
+                  <path
+                    d="M12 21s-6.7-4.35-9.33-7.04C.9 12.18 0 10.7 0 8.99 0 5.69 2.69 3 6 3c1.88 0 3.66.88 4.8 2.25C11.94 3.88 13.72 3 15.6 3 18.91 3 21.6 5.69 21.6 8.99c0 1.71-.9 3.19-2.67 4.97C18.7 16.65 12 21 12 21z" />
+                </svg>
+
+                <div class="place-card__image">
+                  <img src="<%= card.mediaUrl %>" alt="<%= card.title %>" />
+                </div>
+
+                <h3 class="place-card__title"><%= card.title %></h3>
+
+                <div class="place-card__footer">
+                  <p class="place-card__address"><%= card.address %></p>
+                </div>
+              </div>
+            </a>
+            <% }) %>
+          </div>
+          <% } else { %>
+          <p>No favorite destinations yet.</p>
+          <% } %>
+        </div>
+      </div>
+
+      <!-- TRIPS -->
+      <div class="tab-content" id="trips">
+        <div class="card">
+          <h2>My Trips</h2>
+          <p>No trips yet</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Media</title>
+    <link rel="stylesheet" href="/css/fileSubmit.css" />
+  </head>
+  <body>
+    <div class="outer">
+      <form id="uploadForm" enctype="multipart/form-data">
+        <h2>Upload Image / Video</h2>
+        <div>
+          <label for="title">Title of image :</label>
+          <input type="text" id="title" name="title" placeholder="Title" />
+        </div>
+        <div>
+          <label for="description">Description :</label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            placeholder="Description" />
+        </div>
+        <div>
+          <label for="address">Address :</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="addresss" />
+        </div>
+        <div>
+          <label for="location">Location :</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            placeholder="location" />
+        </div>
+        <div>
+          <label for="mapUrl">Mapurl :</label>
+          <input type="text" id="mapUrl" name="mapUrl" placeholder="mapurl" />
+        </div>
+        <div>
+          <label for="name">Name :</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="name"
+            required />
+        </div>
+        <div>
+          <label for="glance1">At a Glance 1:</label>
+          <input type="text" id="glance1" name="glance1" placeholder="glance" />
+        </div>
+        <div>
+          <label for="glance2">At a Glance 2:</label>
+          <input type="text" id="glance2" name="glance2" placeholder="glance" />
+        </div>
+        <div>
+          <label for="bttv">Best time to Visit :</label>
+          <input
+            type="text"
+            id="bttv"
+            name="bttv"
+            placeholder="Best time to visit" />
+        </div>
+        <div>
+          <label for="allowed">Allowed Items :</label>
+          <input
+            type="text"
+            id="allowed"
+            name="allowed"
+            placeholder="allowed Item" />
+        </div>
+        <div class="file-upload full-width">
+          <input
+            type="file"
+            name="file"
+            id="file"
+            accept="image/*,video/*"
+            required />
+          <label for="file">
+            <span class="icon">📁</span>
+            <span class="text" id="fileName"
+              >Click to upload image or video</span
+            >
+            <span class="sub">PNG, JPG, MP4 supported</span>
+          </label>
+        </div>
+        <div class="progress-container full-width">
+          <div id="progressBar" class="full-width"></div>
+        </div>
+
+        <button type="submit" id="upload" data-route="/api/upload">
+          Upload
+        </button>
+
+        <button
+          type="submit"
+          id="destination"
+          data-route="/api/upload/destination">
+          Upload on Destination
+        </button>
+      </form>
+      <div id="toast"></div>
+    </div>
+    <script src="/js/fileSubmit.js"></script>
+  </body>
+</html>

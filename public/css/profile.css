@@ -1,0 +1,195 @@
+
+.profile-scope {
+  --primary: #2563eb;
+  --dark: #0f172a;
+  --light-bg: #f0f2f5;
+  --card-bg: #ffffff;
+  --text-dark: #111827;
+  --text-muted: #6b7280;
+  --success: #22c55e;
+  --danger: #dc2626;
+  --radius: 14px;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* reset only inside profile */
+.profile-scope *,
+.profile-scope *::before,
+.profile-scope *::after {
+  box-sizing: border-box;
+}
+
+/* layout */
+.profile-scope .profile-container {
+  display: flex;
+  min-height: 100vh;
+  background: var(--light-bg);
+}
+
+/* sidebar */
+.profile-scope .sidebar {
+  width: 260px;
+  background: var(--dark);
+  color: white;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-scope .user-box {
+  display: flex;
+  align-items: center;      /* vertical center alignment */
+  gap: 16px;  
+                /* space between image & text */
+}
+
+
+
+.profile-scope .user-box img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-scope .menu button {
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #334155;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.profile-scope .menu button.active {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.profile-scope .logout {
+  background: var(--danger);
+  padding: 12px;
+  text-align: center;
+  border-radius: 8px;
+  color: white;
+  text-decoration: none;
+}
+
+/* main */
+.profile-scope .main {
+  flex: 1;
+  padding: 40px;
+}
+
+/* cards */
+.profile-scope .card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+  margin-bottom: 25px;
+}
+
+.profile-scope .card h2 {
+  border-left: 5px solid var(--primary);
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+/* grid */
+.profile-scope .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 👈 2 cards per row */
+  gap: 20px;
+}
+
+.profile-scope label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.profile-scope input,
+.profile-scope textarea {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.profile-scope textarea {
+  resize: none;
+  height: 120px;
+}
+
+/* actions */
+.profile-scope .actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.profile-scope .edit {
+  background: var(--dark);
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+}
+
+.profile-scope .save {
+  background: var(--success);
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 8px;
+}
+
+/* tabs */
+.profile-scope .tab-content {
+  display: none;
+}
+.profile-scope .tab-content.active {
+  display: block;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .profile-scope .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+}
+
+@media (max-width: 600px) {
+  .profile-scope .profile-container {
+    flex-direction: column;
+  }
+  .profile-scope .sidebar {
+    width: 100%;
+  }
+  .profile-scope .grid {
+    grid-template-columns: 1fr;
+  }
+  .favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Feedback</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/feedback.css" />
+  </head>
+  <body>
+    <div class="page-center">
+      <div class="feedback-card">
+        <h2>💬 Feedback</h2>
+        <p class="subtitle">Your opinion helps us improve</p>
+
+        <form id="feedbackForm" enctype="multipart/form-data">
+          <!-- Feedback Type -->
+          <div class="radio-group">
+            <strong>Feedback Type</strong><br />
+            <label>
+              <input type="radio" name="type" value="Bug Report" required />
+              Bug Report
+            </label>
+
+            <label>
+              <input type="radio" name="type" value="Feature Request" />
+              Feature Request
+            </label>
+
+            <label>
+              <input type="radio" name="type" value="General Feedback" />
+              General Feedback
+            </label>
+          </div>
+
+          <!-- Rating -->
+          <div class="stars" id="stars">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+
+          <div class="emoji" id="emoji">😐</div>
+          <input type="hidden" name="rating" id="rating" />
+
+          <!-- Message -->
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            maxlength="250"
+            placeholder="Write your feedback..."
+            required
+            class="form-control"></textarea>
+
+          <div class="counter"><span id="count">0</span>/250</div>
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email (optional)"
+            class="form-control" />
+
+          <input
+            type="file"
+            name="screenshot"
+            class="form-control file-input" />
+
+          <!-- Submit -->
+          <button type="submit">Submit Feedback</button>
+        </form>
+        <div
+          id="successMsg"
+          style="display: none; color: green; margin-top: 15px">
+          🎉 Thank you for your feedback!
+        </div>
+      </div>
+    </div>
+    <script>
+      // Star rating
+      const stars = document.querySelectorAll(".stars span");
+      const ratingInput = document.getElementById("rating");
+      const emoji = document.getElementById("emoji");
+      const form = document.getElementById("feedbackForm");
+
+      stars.forEach((star) => {
+        star.addEventListener("click", () => {
+          const value = star.dataset.value;
+          ratingInput.value = value;
+
+          stars.forEach((s) => s.classList.remove("active"));
+          for (let i = 0; i < value; i++) {
+            stars[i].classList.add("active");
+          }
+
+          emoji.textContent = value <= 2 ? "😡" : value == 3 ? "😐" : "😊";
+        });
+      });
+
+      // Character counter
+      const message = document.getElementById("message");
+      const count = document.getElementById("count");
+
+      message.addEventListener("input", () => {
+        count.textContent = message.value.length;
+      });
+
+      //from data handling
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        document.getElementById("successMsg").style.display = "none";
+        const formData = new FormData(form);
+
+        const res = await fetch("/api/feedback", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+          document.getElementById("successMsg").style.display = "block";
+
+          form.reset();
+        } else {
+          alert(data.message);
+        }
+      });
+    </script>
+  </body>
+</html>

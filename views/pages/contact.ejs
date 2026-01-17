@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/css/contact.css" />
+  </head>
+  <body>
+    <section class="contact-wrapper">
+      <div class="contact-form">
+        <h2>📩 Contact Us</h2>
+        <p class="subtitle">We’d love to hear from you</p>
+
+        <form id="contactForm">
+          <label>Name</label>
+          <input type="text" name="name" class="form-control" required />
+
+          <label>Email</label>
+          <input type="email" name="email" class="form-control" required />
+
+          <label>Subject</label>
+          <select name="subject" class="form-control">
+            <option>General Inquiry</option>
+            <option>Support</option>
+            <option>Feedback</option>
+            <option>Bug Report</option>
+          </select>
+
+          <label>Message</label>
+          <textarea
+            name="message"
+            rows="5"
+            class="form-control"
+            required></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+
+        <div id="responseMsg"></div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+
+        <div class="info-item">📧 support@example.com</div>
+        <div class="info-item">📞 +91 98765 43210</div>
+        <div class="info-item">⏰ Mon–Fri, 9 AM – 6 PM</div>
+        <div class="info-item">📍 Patna, Bihar</div>
+
+        <div class="social-icons">
+          <a href="#">🌐</a>
+          <a href="#">🐦</a>
+          <a href="#">📘</a>
+          <a href="#">💼</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      const form = document.getElementById("contactForm");
+      const msgBox = document.getElementById("responseMsg");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        msgBox.textContent = "";
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData);
+
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        });
+
+        const result = await res.json();
+
+        msgBox.textContent = result.message;
+        msgBox.style.color = result.success ? "green" : "red";
+
+        if (result.success) form.reset();
+      });
+    </script>
+  </body>
+</html>

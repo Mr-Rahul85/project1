@@ -1,0 +1,83 @@
+<main id="destination-page" data-city="<%= destination.location %>">
+  <h1 class="dp"><%= destination.name.replace(/-/g, ' ')
+    .replace(/\b\w/g, c => c.toUpperCase()) %></h1>
+
+  <div style="display: flex">
+    <img src="<%= destination.mediaUrl %>" class="hero-img" />
+
+    <div class="important">
+      <div class="weather-card">
+        <h1 id="location"><%= destination.location.split(',')[0].trim()%></h1>
+        <p id="condition">Few Clouds</p>
+        <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon">
+        <p id="temperature">31.4°C</p>
+        <div class="details">
+            <div><span>Feels Like</span><span id="feels-like"></span></div>
+            <div><span>Wind</span><span id="wind"></span></div>
+            <div><span>Pressure</span><span id="pressure"></span></div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p><%= destination.description %></p>
+
+ 
+  <div class="glance-map-wrapper">
+
+    <div class="at-glance-container">
+      <h1 class="at-glance-title">At a Glance</h1>
+
+      <p class="at-glance-text"><%= destination?.glance1 || '' %>
+</p>
+
+     
+
+      <p class="at-glance-text">
+        <strong>Best Time to Visit :</strong><%= destination?.bttv || '' %>
+
+      </p>
+
+      <p class="at-glance-text">
+        <strong>Electronic Gadgets :</strong><%= destination?.allowed || 'No permission information available.' %>
+
+      </p>
+    </div>
+
+    <iframe
+      src="<%= destination.mapUrl %>"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+
+  </div>
+  <h2 class="dp">Recommendations </h2>
+  <div class="place-scope1">
+  <div class="place-grid">
+    <% cards.forEach(card => { %>
+    <a href="/all-destination/<%- card.name %>" class="card">
+      <div class="place-card">
+        <svg
+          class="wishlist-heart <%= user?.wishlist?.some(id => id.toString() === card._id.toString()) ? 'active' : '' %>"
+          data-id="<%= card._id %>"
+          viewBox="0 0 24 24"
+          aria-label="Save destination"
+          role="button">
+          <path
+            d="M12 21s-6.7-4.35-9.33-7.04C.9 12.18 0 10.7 0 8.99 0 5.69 2.69 3 6 3c1.88 0 3.66.88 4.8 2.25C11.94 3.88 13.72 3 15.6 3 18.91 3 21.6 5.69 21.6 8.99c0 1.71-.9 3.19-2.67 4.97C18.7 16.65 12 21 12 21z" />
+        </svg>
+        <div class="place-card__image">
+          <img src="<%= card.mediaUrl %>" alt="<%= card.title %>" />
+        </div>
+
+        <h3 class="place-card__title"><%= card.title %></h3>
+
+        <div class="place-card__footer">
+          <p class="place-card__address"><%= card.address %></p>
+        </div>
+      </div>
+    </a>
+    <% }) %>
+  </div>
+</div>
+</main>

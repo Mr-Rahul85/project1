@@ -1,0 +1,111 @@
+.video-wrapper-outer {
+  background: #0f0f0f;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+.video-box {
+  position: relative;
+}
+.video-wrapper {
+  width: 90%;
+  max-width: 900px;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  height: auto;
+  max-height: 600px;
+  display: block;
+  background: black;
+  object-fit: contain;
+}
+
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: #1c1c1c;
+}
+.muted {
+  background: #b30000 !important;
+}
+button,
+select {
+  background: #333;
+  color: #fff;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover,
+select:hover {
+  background: #555;
+}
+
+input[type="range"] {
+  flex: 1;
+  cursor: pointer;
+}
+.video-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  border-radius: 4px;
+  z-index: 10;
+  pointer-events: none;
+}
+/* ================= FULLSCREEN MODE ================= */
+
+.video-wrapper-outer:fullscreen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Expand inner wrapper */
+.video-wrapper-outer:fullscreen .video-wrapper {
+  width: 100%;
+  max-width: none;
+  height: auto;        /* ✅ DO NOT force height */
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.video-wrapper-outer:fullscreen video {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: auto;
+  display: block;
+  background: black;
+}
+
+/* Keep controls visible */
+.video-wrapper-outer:fullscreen .controls {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+
+

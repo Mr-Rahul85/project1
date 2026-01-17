@@ -1,0 +1,195 @@
+<main>
+  <section class="hero">
+    <div class="hero-text">
+      <h1>
+        It's a Beautiful state<br />
+        Out Their, go<br />
+        Explore
+      </h1>
+
+      <p>
+        We always makes our customer happy by providing <br />
+        as many choices as possible.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn-primary">
+          Plan a trip
+          <img src="<%= images[1].mediaUrl %>" alt="arrow" />
+        </button>
+
+        <a href="/video" class="watch">
+          <div class="story">
+            <img src="<%= images[2].mediaUrl %>" alt="person" class="person" />
+            <img src="<%= images[19].mediaUrl %>" alt="play" class="play" />
+            <p>Watch our Story</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="hero-image">
+      <img src="<%= images[0].mediaUrl %>" alt="Traveler" />
+    </div>
+  </section>
+
+  <section class="section-service" aria-label="service">
+    <div class="custome">
+      <div class="title-wrapper">
+        <p class="section-subtitle">What we serve</p>
+        <h2 class="title_section-title">Top Values For You</h2>
+        <p class="section-text">
+          Try a variety of benefits when using our services.
+        </p>
+      </div>
+    </div>
+    <div class="custome">
+      <div class="title-wrapper2">
+        <img
+          src="<%= images[3].mediaUrl %>"
+          class="destination"
+          alt="Destination"
+          height="50rem;"
+          width="50rem;" />
+        <h4 class="title_section-title">Lot of choices</h4>
+        <p class="section-text">Total 20+ destinations that we work with.</p>
+      </div>
+    </div>
+    <div class="custome">
+      <div class="title-wrapper3">
+        <img
+          src="<%= images[4].mediaUrl %>"
+          alt="guide"
+          width="40rem"
+          height="40rem"
+          class="destination" />
+        <h4 class="title_section-title">Best tour guide</h4>
+        <p class="section-text">Our tour guide with 2+years experience.</p>
+      </div>
+    </div>
+    <div class="custome">
+      <div class="title-wrapper4">
+        <img
+          src="<%= images[5].mediaUrl %>"
+          alt="Booking"
+          width="40rem"
+          class="destination" />
+        <h4 class="title_section-title">Easy Booking</h4>
+        <p class="section-text">
+          With an easy and fast ticket purchase process.
+        </p>
+      </div>
+    </div>
+  </section>
+  <div class="main-section">
+    <p>TOP DESTINSTION</p>
+    <h1>Explore top destination</h1>
+  </div>
+
+  <section class="top-destination">
+    <% cards.forEach(card => { %>
+    <a href="/all-destination/<%- card.name %>" class="card">
+      <div class="place-card">
+        <svg
+          class="wishlist-heart <%= user?.wishlist?.some(id => id.toString() === card._id.toString()) 
+              ? 'active' 
+              : '' %>"
+          data-id="<%= card._id %>"
+          viewBox="0 0 24 24"
+          aria-label="Save destination"
+          role="button">
+          <path
+            d="M12 21s-6.7-4.35-9.33-7.04C.9 12.18 0 10.7 0 8.99 0 5.69 2.69 3 6 3c1.88 0 3.66.88 4.8 2.25C11.94 3.88 13.72 3 15.6 3 18.91 3 21.6 5.69 21.6 8.99c0 1.71-.9 3.19-2.67 4.97C18.7 16.65 12 21 12 21z" />
+        </svg>
+        <div class="place-card__image">
+          <img src="<%= card.mediaUrl %>" alt="<%= card.title %>" />
+        </div>
+
+        <h3 class="place-card__title"><%= card.title %></h3>
+
+        <div class="place-card__footer">
+          <p class="place-card__address"><%= card.address %></p>
+        </div>
+      </div>
+    </a>
+    <% }) %>
+  </section>
+
+  <div id="all-dest">
+    <a href="/all-destination" class="all-destination">
+      View All Destination
+    </a>
+  </div>
+
+  <section class="experience">
+    <div class="poster">
+      <img src="<%= images[12].mediaUrl %>" alt="profile" class="actress" />
+      <img src="<%= images[20].mediaUrl %>" alt="service" class="service" />
+    </div>
+
+    <div class="escape">
+      <p class="our">OUR EXPERIENCE</p>
+      <h2>With Our Experience We Will Serve You</h2>
+      <p class="details">
+        Since we first opened we have always prioritized the convenience of our
+        users by providing low prices and with a easy process.
+      </p>
+
+      <div class="nitrozen">
+        <div class="about1">
+          <h3 class="material">02</h3>
+          <p class="alco">Years Experience</p>
+        </div>
+        <div class="about2">
+          <h3 class="material">20+</h3>
+          <p class="alco">Destination Collaboration</p>
+        </div>
+        <div class="about3">
+          <h3 class="material">2K+</h3>
+          <p class="alco">Happy Customers</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="photo-gallery">
+    <p>PHOTO GALLERY</p>
+    <h2>Photo's From Travelers</h2>
+  </div>
+
+  <div class="photo-album">
+    <div class="magestic">
+      <div class="mix">
+        <div class="ph1">
+          <img src="<%= images[13].mediaUrl %>" alt="ashok atamb" />
+        </div>
+        <div class="ph2">
+          <img src="<%= images[14].mediaUrl %>" alt="mahabodi mandir" />
+        </div>
+      </div>
+
+      <div class="ph3">
+        <img src="<%= images[15].mediaUrl %>" alt="ghodakatora" />
+      </div>
+    </div>
+    <div class="ph4">
+      <img src="<%= images[16].mediaUrl %>" alt="glass bridge" />
+    </div>
+    <div class="mr">
+      <div class="ph5">
+        <img src="<%= images[17].mediaUrl %>" alt="waterfall" />
+      </div>
+      <div class="ph6">
+        <img src="<%= images[18].mediaUrl %>" alt="hanuman mandir" />
+      </div>
+    </div>
+  </div>
+  <div class="let">
+    <div class="bhojpur">
+      <h2>Prepare Yourself & Let’s Explore The Beauty Of The Bihar</h2>
+    </div>
+
+    <p>We have many special offers especially for you.</p>
+    <button class="backpack"><a href="#">Get Started</a></button>
+  </div>
+</main>
