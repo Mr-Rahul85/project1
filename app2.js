@@ -33,6 +33,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "layouts/main");
+app.set("trust proxy", 1);
 
 app.use(express.static("public"));
 app.use(express.json());
