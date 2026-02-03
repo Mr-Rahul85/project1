@@ -1,5 +1,6 @@
 {
   "type": "module",
+  "start": "node app2.js",
   "dependencies": {
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.8.0",
