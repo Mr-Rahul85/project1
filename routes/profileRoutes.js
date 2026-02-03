@@ -1,5 +1,5 @@
 import express from "express";
-import User from "../model/User.js";
+import User from "../model/user.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import noCache from "../middleware/noCache.js";
 import { requireAuth } from "../middleware/requireAuth.js";
