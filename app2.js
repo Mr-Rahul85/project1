@@ -3,7 +3,7 @@ import "dotenv/config";
 import connectDB from "./config/db.js";
 import cloudinary from "./config/cloudinary.js";
 import Post from "./model/post.js";
-import User from "./model/User.js";
+import User from "./model/user.js";
 import Destination from "./model/destinations.js";
 import cookieParser from "cookie-parser";
 import session from "express-session";
