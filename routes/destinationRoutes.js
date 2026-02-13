@@ -10,9 +10,9 @@ router.get("/", requireAuth, authMiddleware, async (req, res) => {
   }
   const cards = await Destination.find();
   res.render("pages/destination", {
-    // user: req.session.userId,
     pageCss: "place-card.css",
     cards,
+    title: "All Destinations",
   });
 });
 router.get("/:name", async (req, res) => {
@@ -25,7 +25,10 @@ router.get("/:name", async (req, res) => {
   const destination = await Destination.findOne({
     name: req.params.name,
   });
-
+  const formattedName = destination.name
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
   if (!destination) {
     res.status(404).render("pages/404");
   }
@@ -33,6 +36,7 @@ router.get("/:name", async (req, res) => {
   res.render("pages/place-content", {
     destination,
     cards: randomCards,
+    title: `${formattedName}`,
   });
 });
 

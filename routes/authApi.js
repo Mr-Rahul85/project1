@@ -104,58 +104,50 @@ router.get("/me", async (req, res) => {
   }
 
   const user = await User.findById(req.session.userId).select(
-    "username email photo wishlist"
+    "username email photo wishlist",
   );
 
   res.json({ success: true, user });
 });
-// admin panel request
+
+
+//admin login page
 router.post("/admin/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+   
 
-    // 1️⃣ Find admin
     const admin = await User.findOne({ email, role: "admin" });
-    if (!admin) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid email or password"
-      });
+     const isMatch = await bcrypt.compare(password, admin.password);
+    if (!admin || !isMatch) {
+      return res.redirect("/admin/login?error=Invalid email or password");
     }
 
-    // 2️⃣ Verify password
-    const isMatch = await bcrypt.compare(password, admin.password);
-    if (!isMatch) {
-      return res.status(401).json({
-        success: false,
-        message: "Invalid email or password"
-      });
-    }
-
-    // 3️⃣ Generate JWT
     const token = jwt.sign(
       {
         id: admin._id,
         email: admin.email,
-        role: "admin"
+        role: "admin",
       },
       jwtConfig.secret,
-      { expiresIn: jwtConfig.expiresIn }
+      { expiresIn: jwtConfig.expiresIn },
     );
 
-    // 4️⃣ JSON response ONLY
-    return res.status(200).json({
-      success: true,
-      token,
-      expiresIn: jwtConfig.expiresIn
+    // ✅ SET COOKIE
+    res.cookie("token", token, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: false,
     });
 
+    // ✅ REDIRECT
+    return res.redirect("/upload");
   } catch (err) {
     console.error("Admin login error:", err);
-    return res.status(500).json({
-      success: false,
-      message: "Internal server error"
-    });
+    // return res.redirect("/admin/login?error=Server");
+    return res.redirect(
+    "/admin/login?error=Server problem, try again"
+  );
   }
 });
 

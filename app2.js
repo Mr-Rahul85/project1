@@ -22,6 +22,7 @@ import authApi from "./routes/authApi.js"; //validate the data comes from signIn
 import profileRoutes from "./routes/profileRoutes.js"; //show the profile when user is logged in
 import destinationRoutes from "./routes/destinationRoutes.js"; //show the all-destinaton to the user
 import contactRoute from "./routes/contactRoute.js";
+import aboutRoute from "./routes/aboutRoute.js";
 import feedbackRoute from "./routes/feedbackRoute.js";
 import adminRoute from "./routes/adminRoute.js";
 import currentUser from "./middleware/currentUser.js";
@@ -75,41 +76,29 @@ app.use("/admin/login", adminRoute);
 app.use("/", profileRoutes);
 app.use("/all-destination", destinationRoutes);
 app.use("/contact", contactRoute);
+app.use("/about", aboutRoute);
 app.use("/feedback", feedbackRoute);
 
 // HOME
 app.get("/", async (req, res) => {
   const posts = await Post.find({ mediaType: "image" });
 
-  const images = posts.map((post) => ({
-    id: post._id,
-    title: post.title,
-    mediaUrl: cloudinary.url(post.publicId, {
+  const images = {};
+
+  posts.forEach((post) => {
+    const key = post.title.replace(/\s+/g, "").toLowerCase();
+
+    images[key] = cloudinary.url(post.publicId, {
       secure: true,
       quality: "auto",
       fetch_format: "auto",
-    }),
-  }));
+    });
+  });
   const cards = await Destination.find().limit(6);
 
   res.render("pages/home", { images, cards });
 });
-// app.use(async (req, res, next) => {
-//   if (!req.session.userId) {
-//     res.locals.user = null;
-//     return next();
-//   }
 
-//   const user = await User.findById(req.session.userId);
-//   if (!user) {
-//     req.session.destroy();
-//     res.locals.user = null;
-//     return next();
-//   }
-
-//   res.locals.user = user;
-//   next();
-// });
 app.get("/api/weather", async (req, res) => {
   try {
     let city = req.query.city;

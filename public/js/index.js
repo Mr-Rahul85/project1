@@ -61,6 +61,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+//about page
+(function() {
+    const hbBtn = document.getElementById("hbExploreBtn");
+
+    if (hbBtn) {
+        hbBtn.addEventListener("click", function() {
+            alert("Welcome to HiddenBihar! Start your journey today 🌄");
+        });
+    }
+})();
 //footer section
 document.querySelectorAll(".footer-title").forEach(title => {
   title.addEventListener("click", () => {

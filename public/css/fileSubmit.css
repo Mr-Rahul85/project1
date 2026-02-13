@@ -195,3 +195,48 @@ form input[type="text"]:focus {
     grid-template-columns: 1fr;
   }
 }
+/* ===== Upload Header ===== */
+
+.upload-header {
+  width: 100%;
+  max-width: 720px;
+  margin: 20px auto -10px auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3b82f6;
+}
+
+.admin-name {
+  font-weight: 600;
+  color: #334155;
+}
+
+.logout-btn {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(135deg, #f52b2bab, #dc2626);
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.logout-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(220,38,38,0.3);
+}
