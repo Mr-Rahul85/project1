@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/", (req, res) => {
   const { token } = req.query;
 
-  res.render("reset-password", { token, layout: "layouts/auth" });
+  res.render("pages/reset-password", { token, layout: "layouts/auth" });
 });
 
 router.post("/:token", async (req, res) => {
