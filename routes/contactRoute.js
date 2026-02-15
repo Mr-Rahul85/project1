@@ -1,7 +1,8 @@
 import express from "express";
+import Contact from "../model/contact.js";
 
 const router = express.Router();
-import Contact from "../model/contact.js";
+
 router.get("/", (req, res) => {
   res.render("pages/contact", { success: null, error: null });
 });

@@ -74,7 +74,10 @@
           
           <div class="flex flex-col w-full sm:w-auto">
             <label for="status" class="text-sm text-gray-700 font-medium mb-2">Update Status To:</label>
-            <select name="status" id="status" required class="border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white cursor-pointer min-w-[250px] shadow-sm">
+            <select name="status" id="status" required 
+                    class="border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-w-[250px] shadow-sm 
+                    <%= booking.status === 'Cancelled' ? 'bg-gray-100 cursor-not-allowed text-gray-500' : 'bg-white cursor-pointer' %>"
+                    <%= booking.status === 'Cancelled' ? 'disabled' : '' %>>
               <option value="Pending" <%= booking.status === 'Pending' ? 'selected' : '' %>>Pending</option>
               <option value="Confirmed" <%= booking.status === 'Confirmed' ? 'selected' : '' %>>Confirmed</option>
               <option value="Completed" <%= booking.status === 'Completed' ? 'selected' : '' %>>Completed</option>
@@ -82,7 +85,10 @@
             </select>
           </div>
           
-          <button type="submit" class="w-full sm:w-auto mt-4 sm:mt-0 bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+          <button type="submit" 
+                  class="w-full sm:w-auto mt-4 sm:mt-0 px-6 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-white
+                  <%= booking.status === 'Cancelled' ? 'bg-blue-400 cursor-not-allowed opacity-70' : 'bg-blue-600 hover:bg-blue-700' %>"
+                  <%= booking.status === 'Cancelled' ? 'disabled' : '' %>>
             Save Changes
           </button>
 

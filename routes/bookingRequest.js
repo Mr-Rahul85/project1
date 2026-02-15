@@ -35,7 +35,7 @@ router.get("/:id", pageAuth, async (req, res) => {
         .status(404)
         .render("pages/404", { title: "Booking Not Found" });
     }
-
+    
     res.render("pages/booking-request-detail", {
       isAdminPage: true,
       user: fullUser,
@@ -52,8 +52,22 @@ router.post("/:id/status", pageAuth, async (req, res) => {
   try {
     const bookingId = req.params.id;
     const { status } = req.body;
+    
+    const booking = await Booking.findById(bookingId);
 
-    await Booking.findByIdAndUpdate(bookingId, { status: status });
+    if (!booking) {
+      return res.status(404).send("Booking Not Found");
+    }
+
+  
+    if (booking.status === 'Cancelled') {
+      console.log("Attempted to update a cancelled booking. Blocked.");
+      return res.redirect(`/admin/booking-request/${bookingId}`);
+    }
+
+    
+    booking.status = status;
+    await booking.save();
 
     res.redirect(`/admin/booking-request/${bookingId}`);
   } catch (err) {
