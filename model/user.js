@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       trim: true,
       unique: false,
-      sparse: true, 
+      sparse: true,
     },
 
     email: {
@@ -25,12 +25,19 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: function () {
-        return !this.googleId; 
+        return !this.googleId;
       },
+    },
+    passwordResetToken: {
+      type: String,
+    },
+
+    passwordResetExpires: {
+      type: Date,
     },
 
     photo: String,
-      phone: {
+    phone: {
       type: String,
       trim: true,
     },
@@ -49,9 +56,9 @@ const userSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user",
     },
-    wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Destination" }]
+    wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Destination" }],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const User = mongoose.models.User || mongoose.model("User", userSchema);

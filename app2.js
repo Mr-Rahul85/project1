@@ -27,7 +27,8 @@ import aboutRoute from "./routes/aboutRoute.js";
 import feedbackRoute from "./routes/feedbackRoute.js";
 import adminRoute from "./routes/adminRoute.js";
 import currentUser from "./middleware/currentUser.js";
-
+import forgetPass from "./routes/forgetPassword.js";
+import resetPass from "./routes/reset-password.js";
 import path from "path";
 import { fileURLToPath } from "url";
 const app = express();
@@ -56,7 +57,7 @@ app.use(
       secure: false, // true only in HTTPS
       maxAge: 1000 * 60 * 60 * 24, // 1 day
     },
-  })
+  }),
 );
 // Passport
 app.use(passport.initialize());
@@ -80,6 +81,8 @@ app.use("/contact", contactRoute);
 app.use("/about", aboutRoute);
 app.use("/feedback", feedbackRoute);
 app.use("/booking", bookingRoutes);
+app.use("/forgot-password", forgetPass);
+app.use("/reset-password",resetPass);
 
 // HOME
 app.get("/", async (req, res) => {
@@ -107,7 +110,7 @@ app.get("/api/weather", async (req, res) => {
     city = city.split(",")[0].trim();
     console.log("Weather request for:", city);
     const response = await fetch(
-      `${process.env.API_URL}?q=${city}&appid=${process.env.API_KEY}&units=metric`
+      `${process.env.API_URL}?q=${city}&appid=${process.env.API_KEY}&units=metric`,
     );
 
     const data = await response.json();

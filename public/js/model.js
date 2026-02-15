@@ -57,10 +57,7 @@ document.querySelectorAll(".toggle-password").forEach((icon) => {
   });
 });
 
-// document.querySelectorAll("form").forEach((form) => {
-//   form.addEventListener("submit", (e) => e.preventDefault());
-// });
-// ONLY prevent default on the specific forms managed by this script
+
 const formsToPrevent = [signInForm, signUpForm, forgotPassForm].filter(Boolean);
 
 formsToPrevent.forEach((form) => {
@@ -118,7 +115,7 @@ if (signInForm) {
 
 if (signUpForm) {
   signUpForm.addEventListener("submit", async function (e) {
-    e.preventDefault(); // Stop the page from reloading
+    e.preventDefault();
 
     if (errorMsg1) {
         errorMsg1.innerText = "";
@@ -173,5 +170,66 @@ if (signUpForm) {
       }
     }
     
+  });
+}
+
+if (forgotPassForm) {
+  forgotPassForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    
+    const emailInput = forgotPassForm.querySelector('input[type="email"]');
+    const submitBtn = forgotPassForm.querySelector('button[type="submit"]');
+    
+    
+    const originalBtnText = submitBtn ? submitBtn.innerText : "Reset Password";
+    if (submitBtn) {
+      submitBtn.innerText = "Sending...";
+      submitBtn.disabled = true;
+    }
+
+    const formData = {
+      email: emailInput ? emailInput.value : "",
+    };
+
+    try {
+      
+      const response = await fetch("/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok || result.success) {
+        alert(result.message || "A password reset link has been sent to your email!");
+        
+        forgotPassForm.reset();
+
+        
+        if (
+          typeof hideAll === "function" &&
+          typeof loginWrapper !== "undefined"
+        ) {
+          hideAll();
+          loginWrapper.classList.remove("hidden-form");
+        }
+      } else {
+        
+        alert(result.message || "Failed to send reset email.");
+      }
+    } catch (error) {
+      console.error("Forgot Password Error:", error);
+      alert("Something went wrong. Please try again later.");
+    } finally {
+      
+      if (submitBtn) {
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+      }
+    }
   });
 }
