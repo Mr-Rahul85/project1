@@ -28,9 +28,9 @@ video {
   object-fit: contain;
 }
 
-
 .controls {
   display: flex;
+  flex-wrap: wrap; 
   align-items: center;
   gap: 8px;
   padding: 10px;
@@ -39,6 +39,7 @@ video {
 .muted {
   background: #b30000 !important;
 }
+
 button,
 select {
   background: #333;
@@ -47,6 +48,8 @@ select {
   padding: 6px 10px;
   cursor: pointer;
   border-radius: 4px;
+  flex-shrink: 0; 
+  white-space: nowrap; 
 }
 
 button:hover,
@@ -69,7 +72,7 @@ input[type="range"] {
   z-index: 10;
   pointer-events: none;
 }
-/* ================= FULLSCREEN MODE ================= */
+
 
 .video-wrapper-outer:fullscreen {
   display: flex;
@@ -78,11 +81,10 @@ input[type="range"] {
 }
 
 
-/* Expand inner wrapper */
 .video-wrapper-outer:fullscreen .video-wrapper {
   width: 100%;
   max-width: none;
-  height: auto;        /* ✅ DO NOT force height */
+  height: auto;        
   border-radius: 0;
   display: flex;
   flex-direction: column;
@@ -100,12 +102,21 @@ input[type="range"] {
   background: black;
 }
 
-/* Keep controls visible */
+
 .video-wrapper-outer:fullscreen .controls {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
-
+@media (max-width: 480px) {
+  .controls{
+    justify-content: center;
+  }
+  input[type="range"] {
+    order: -1; 
+    min-width: 100%; 
+    margin-bottom: 8px;
+  }
+}
 
 

@@ -110,16 +110,20 @@ router.get("/me", async (req, res) => {
   res.json({ success: true, user });
 });
 
-
 //admin login page
 router.post("/admin/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-   
 
     const admin = await User.findOne({ email, role: "admin" });
-     const isMatch = await bcrypt.compare(password, admin.password);
-    if (!admin || !isMatch) {
+
+    if (!admin) {
+      return res.redirect("/admin/login?error=Invalid email or password");
+    }
+
+    const isMatch = await bcrypt.compare(password, admin.password);
+
+    if (!isMatch) {
       return res.redirect("/admin/login?error=Invalid email or password");
     }
 
@@ -145,18 +149,24 @@ router.post("/admin/login", async (req, res) => {
   } catch (err) {
     console.error("Admin login error:", err);
     // return res.redirect("/admin/login?error=Server");
-    return res.redirect(
-    "/admin/login?error=Server problem, try again"
-  );
+    return res.redirect("/admin/login?error=Server problem, try again");
   }
 });
 
 /* LOGOUT */
 router.post("/logout", (req, res) => {
   req.session.destroy((err) => {
-    if (err) return res.redirect("/");
+    if (err) {
+      console.error("Session destruction error:", err);
+      return res.redirect("/");
+    }
 
     res.clearCookie("travel.sid");
+    res.clearCookie("token", {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: false,
+    });
     res.redirect("/");
   });
 });

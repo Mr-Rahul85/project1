@@ -54,7 +54,7 @@
   object-fit: cover;
 }
 
-.profile-scope .menu button {
+.profile-scope .menu a {
   width: 100%;
   margin: 8px 0;
   padding: 12px;
@@ -65,7 +65,7 @@
   cursor: pointer;
 }
 
-.profile-scope .menu button.active {
+.profile-scope .menu a.active {
   background: var(--primary);
   border-color: var(--primary);
 }
@@ -188,7 +188,7 @@
   }
   .favorites-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 20px;
 }
 

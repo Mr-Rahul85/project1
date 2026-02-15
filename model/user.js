@@ -11,8 +11,8 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       trim: true,
-      unique: true,
-      sparse: true, // important for google users
+      unique: false,
+      sparse: true, 
     },
 
     email: {
@@ -30,7 +30,15 @@ const userSchema = new mongoose.Schema(
     },
 
     photo: String,
+      phone: {
+      type: String,
+      trim: true,
+    },
 
+    about: {
+      type: String,
+      trim: true,
+    },
     authProvider: {
       type: String,
       enum: ["local", "google"],

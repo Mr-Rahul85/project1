@@ -4,12 +4,9 @@ const progressBar = document.getElementById("progressBar");
 const toast = document.getElementById("toast");
 const fileInput = document.getElementById("file");
 const fileNameText = document.getElementById("fileName");
-const token = localStorage.getItem("adminToken");
 
-if (!token) {
-  window.location.href = "/admin/login";
-}
 let submitRoute = "/api/upload";
+
 fileInput.addEventListener("change", function () {
   if (this.files.length > 0) {
     fileNameText.textContent = this.files[0].name;
@@ -29,9 +26,10 @@ form.addEventListener("submit", function (e) {
   const formData = new FormData(form);
   const xhr = new XMLHttpRequest();
 
+  
   xhr.open("POST", submitRoute);
-  xhr.setRequestHeader("Authorization", `Bearer ${token}`);
-  // Show progress bar
+  
+  
   progressContainer.style.display = "block";
 
   xhr.upload.onprogress = function (e) {
@@ -56,6 +54,7 @@ form.addEventListener("submit", function (e) {
       if (response.success) {
         showToast("File uploaded successfully 🎉");
         form.reset();
+        fileNameText.textContent = "Click to upload image or video"; // Reset text
       } else {
         showToast(response.message || "Upload failed ❌", true);
       }

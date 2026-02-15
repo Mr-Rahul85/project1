@@ -9,53 +9,57 @@
         </div>
 
         <div class="menu">
-          <button class="tab-btn active" data-tab="profile">Profile</button>
-          <button class="tab-btn" data-tab="favorites">
+          <a href="/profile" class="tab-btn <%= activeTab === 'profile' ? 'active' : '' %>" style="display: block; text-decoration: none;">
+            Profile
+          </a>
+          <a href="/profile/favorite" class="tab-btn <%= activeTab === 'favorite' ? 'active' : '' %>" style="display: block; text-decoration: none;">
             Favorite Destinations
-          </button>
-          <button class="tab-btn" data-tab="trips">Trips</button>
+          </a>
+          <a href="/profile/bookings" class="tab-btn <%= activeTab === 'bookings' ? 'active' : '' %>" style="display: block; text-decoration: none;">
+            Booking History
+          </a>
         </div>
-      </div>
 
-      <form action="/api/auth/logout" method="POST">
-        <button type="submit" class="logout">Logout</button>
-      </form>
     </aside>
 
     <!-- MAIN -->
     <main class="main">
       <!-- PROFILE -->
+       <% if (activeTab === 'profile') { %>
       <div class="tab-content active" id="profile">
         <div class="card">
           <h2>Personal Information</h2>
-
+          <form action="/profile/update" method="POST" id="profileForm">
           <div class="grid">
             <div>
               <label>Name</label>
-              <input value="<%= user.username %>" disabled />
+              <input name="username" value="<%= user.username %>" disabled />
             </div>
             <div>
               <label>Email</label>
-              <input value="<%= user.email %>" disabled />
+              <input name="email" value="<%= user.email %>" disabled />
             </div>
             <div>
               <label>Phone</label>
-              <input value="<%= user.phone %>" disabled />
+              <input name="phone" value="<%= user.phone %>" disabled />
             </div>
           </div>
 
           <h2 style="margin-top: 30px">About</h2>
-          <textarea disabled><%= user.about %></textarea>
+          <textarea name="about" disabled><%= user.about %></textarea>
 
           <div class="actions">
-            <button class="edit" id="editBtn">Edit</button>
-            <button class="save" id="saveBtn" disabled>Save</button>
+            <button class="edit" type="button" id="editBtn">Edit</button>
+            <button class="save" type="submit" id="saveBtn" disabled>Save</button>
           </div>
+          </form>
         </div>
+      
       </div>
-
+      <% } %>
       <!-- FAVORITES -->
-      <div class="tab-content" id="favorites">
+       <% if (activeTab === 'favorite') { %>
+      <div class="tab-content active" id="favorites">
         <div class="card">
           <h2>Favorite Destinations</h2>
 
@@ -92,14 +96,77 @@
           <% } %>
         </div>
       </div>
+    <% } %>
+      <!-- bookings -->
+       <% if (activeTab === 'bookings') { %>
+      <div class="tab-content active" id="trips">
+  <div class="card">
+    <h2>Booking History</h2>
+    
+    <% if (typeof bookings !== 'undefined' && bookings.length > 0) { %>
+      <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+        
+        <% bookings.forEach(booking => { %>
+          <div style="border: 1px solid #e5e7eb; border-radius: 12px; padding: 20px; background-color: #fafafa; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e5e7eb; padding-bottom: 12px; margin-bottom: 12px;">
+              <h3 style="margin: 0; font-size: 1.25rem; color: #1f2937; text-transform: capitalize;">
+                📍 <%= booking.destination.split('-').join(' ') %>
+              </h3>
+              
+              <% 
+                let badgeColor = '#f59e0b'; // Yellow for Pending
+                let bgColor = '#fef3c7';
+                if (booking.status === 'Confirmed') { badgeColor = '#059669'; bgColor = '#d1fae5'; } // Green
+                if (booking.status === 'Cancelled') { badgeColor = '#dc2626'; bgColor = '#fee2e2'; } // Red
+              %>
+              <span style="background-color: <%= bgColor %>; color: <%= badgeColor %>; padding: 4px 12px; border-radius: 9999px; font-size: 0.875rem; font-weight: 600; border: 1px solid <%= badgeColor %>;">
+                <%= booking.status %>
+              </span>
+            </div>
 
-      <!-- TRIPS -->
-      <div class="tab-content" id="trips">
-        <div class="card">
-          <h2>My Trips</h2>
-          <p>No trips yet</p>
-        </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; font-size: 0.95rem; color: #4b5563;">
+              <p style="margin: 0;"><strong>Check-in:</strong> <%= new Date(booking.startDate).toLocaleDateString('en-IN') %></p>
+              <p style="margin: 0;"><strong>Check-out:</strong> <%= new Date(booking.endDate).toLocaleDateString('en-IN') %></p>
+              <p style="margin: 0;"><strong>Guests:</strong> <%= booking.guests %> Person(s)</p>
+              <p style="margin: 0;"><strong>Contact:</strong> <%= booking.phone %></p>
+              <p style="margin: 0; grid-column: 1 / -1;"><strong>Booked under:</strong> <%= booking.fullName %> (<%= booking.email %>)</p>
+              
+              <% if (booking.requests && booking.requests.trim() !== '') { %>
+                <p style="margin: 0; grid-column: 1 / -1; background: #fff; padding: 10px; border-radius: 6px; border: 1px dashed #ccc;">
+                  <strong>Special Requests:</strong> <%= booking.requests %>
+                </p>
+              <% } %>
+              
+            </div>
+            
+            <% if (booking.status !== 'Cancelled') { %>
+              <form action="/booking/cancel/<%= booking._id %>" method="POST" onsubmit="return confirm('Are you sure you want to cancel this booking? This action cannot be undone.');" style="margin-top: 15px; border-top: 1px solid #e5e7eb; padding-top: 15px; text-align: right;">
+                <button type="submit" style="background-color: #ef4444; color: white; border: none; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.9rem; transition: background-color 0.2s;" onmouseover="this.style.backgroundColor='#dc2626'" onmouseout="this.style.backgroundColor='#ef4444'">
+                  Cancel Booking
+                </button>
+              </form>
+            <% } else { %>
+              <div style="margin-top: 15px; border-top: 1px solid #e5e7eb; padding-top: 15px; text-align: right; color: #dc2626; font-size: 0.9rem; font-weight: 600;">
+                Cancelled by User
+              </div>
+            <% } %>
+            
+          </div>
+        <% }) %>
+        
       </div>
+      
+    <% } else { %>
+      <div style="text-align: center; padding: 40px 20px; background: #f9fafb; border-radius: 12px; margin-top: 15px;">
+        <p style="color: #6b7280; margin-bottom: 10px;">You haven't booked any trips yet.</p>
+        <a href="/#destinations" style="color: #e11d48; text-decoration: none; font-weight: 600;">Explore Destinations &rarr;</a>
+      </div>
+    <% } %>
+
+    </div>
+  </div>
+  <% } %>
     </main>
   </div>
 </div>

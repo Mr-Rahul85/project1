@@ -7,7 +7,7 @@
         <p class="text-gray-500 mt-2">Book your escape to the hidden gems of Bihar</p>
       </div>
       
-      <form action="/api/bookings" method="POST" id="bookingForm" class="space-y-6">
+      <form action="/booking" method="POST" id="bookingForm" class="space-y-6">
         
         <div>
           <h3 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-4">Trip Details</h3>
@@ -96,6 +96,50 @@
         endDateInput.value = this.value;
       }
     });
+  
+    // --- BOOKING SUCCESS TOAST NOTIFICATION ---
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      // Look for the ?booking=success in the URL
+      if (urlParams.get('booking') === 'success') {
+        showBookingToast();
+        
+        // Clean up the URL so the toast doesn't reappear if they refresh the page
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    });
+
+    function showBookingToast() {
+      const toast = document.createElement('div');
+      
+      toast.innerHTML = `
+        <div style="position: fixed; top: 80px; right: 20px; background-color: #10B981; color: white; padding: 16px 24px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); font-family: 'Segoe UI', Tahoma, sans-serif; z-index: 9999; transform: translateX(120%); transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); max-width: 350px;">
+          <div style="display: flex; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 20px; margin-right: 10px;">🎉</span>
+            <h4 style="margin: 0; font-size: 16px; font-weight: 600;">Booking Request Raised!</h4>
+          </div>
+          <p style="margin: 0; font-size: 14px; opacity: 0.9; line-height: 1.4;">
+            We've received your details. Our travel experts will connect with you shortly to confirm your itinerary.
+          </p>
+        </div>
+      `;
+      
+      document.body.appendChild(toast);
+      const toastElement = toast.firstElementChild;
+
+      // Slide in
+      setTimeout(() => {
+        toastElement.style.transform = 'translateX(0)';
+      }, 100);
+
+      // Slide out after 5 seconds
+      setTimeout(() => {
+        toastElement.style.transform = 'translateX(120%)';
+        setTimeout(() => toast.remove(), 500);
+      }, 5000);
+    }
   </script>
+
   <script src="https://cdn.tailwindcss.com"></script>
   </body>

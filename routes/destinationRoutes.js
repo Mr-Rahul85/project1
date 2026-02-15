@@ -2,9 +2,10 @@ import express from "express";
 import Destination from "../model/destinations.js";
 import { requireAuth } from "../middleware/requireAuth.js";
 import authMiddleware from "../middleware/authMiddleware.js";
+import noCache from "../middleware/noCache.js";
 const router = express.Router();
 
-router.get("/", requireAuth, authMiddleware, async (req, res) => {
+router.get("/", noCache,requireAuth, authMiddleware, async (req, res) => {
   if (!req.session.userId) {
     return res.redirect("/auth");
   }

@@ -57,10 +57,15 @@ document.querySelectorAll(".toggle-password").forEach((icon) => {
   });
 });
 
-document.querySelectorAll("form").forEach((form) => {
+// document.querySelectorAll("form").forEach((form) => {
+//   form.addEventListener("submit", (e) => e.preventDefault());
+// });
+// ONLY prevent default on the specific forms managed by this script
+const formsToPrevent = [signInForm, signUpForm, forgotPassForm].filter(Boolean);
+
+formsToPrevent.forEach((form) => {
   form.addEventListener("submit", (e) => e.preventDefault());
 });
-
 // LOGIN FORM SUBMISSION
 if (signInForm) {
   signInForm.addEventListener("submit", async function (e) {

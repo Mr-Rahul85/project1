@@ -11,7 +11,15 @@
         <li><a href="/contact" class="nav-link">Contact</a></li>
         
         <li>
-          <% if (user) { %>
+          <% if (user && user.role === 'admin') { %>
+          <a href="/upload" class="nav-profile-link" title="Admin Dashboard" style="margin-right: 15px; font-weight: bold; color: #007bff;">
+            Admin Panel
+          </a>
+          <form action="/api/auth/logout" method="POST" style="display: inline">
+            <button type="submit" id="logout">Logout</button>
+          </form>
+
+          <% } else if (user) { %>
           <a href="/profile" class="nav-profile-link" title="Profile">
             <img
               src="<%= user.photo ? user.photo : `https://i.pravatar.cc/150?u=${user._id}` %>"
@@ -21,6 +29,7 @@
           <form action="/api/auth/logout" method="POST" style="display: inline">
             <button type="submit" id="logout">Logout</button>
           </form>
+
           <% } else { %>
           <a href="/auth" class="login-btn">Login</a>
           <% } %>

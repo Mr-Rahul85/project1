@@ -22,6 +22,7 @@ import authApi from "./routes/authApi.js"; //validate the data comes from signIn
 import profileRoutes from "./routes/profileRoutes.js"; //show the profile when user is logged in
 import destinationRoutes from "./routes/destinationRoutes.js"; //show the all-destinaton to the user
 import contactRoute from "./routes/contactRoute.js";
+import bookingRoutes from "./routes/bookingRoute.js";
 import aboutRoute from "./routes/aboutRoute.js";
 import feedbackRoute from "./routes/feedbackRoute.js";
 import adminRoute from "./routes/adminRoute.js";
@@ -78,6 +79,7 @@ app.use("/all-destination", destinationRoutes);
 app.use("/contact", contactRoute);
 app.use("/about", aboutRoute);
 app.use("/feedback", feedbackRoute);
+app.use("/booking", bookingRoutes);
 
 // HOME
 app.get("/", async (req, res) => {

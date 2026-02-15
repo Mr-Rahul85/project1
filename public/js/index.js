@@ -20,18 +20,19 @@ document.addEventListener("click", (e) => {
     navMenu.classList.remove("active");
   }
 });
-//for wishlist section
+
+// wishlist section
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".wishlist-heart").forEach((heart) => {
     heart.addEventListener("click", async (e) => {
       e.preventDefault();
       e.stopPropagation();
 
-      console.log("❤️ Heart clicked"); // DEBUG
-
       const cardId = heart.dataset.id;
-      console.log("Card ID:", cardId); // DEBUG
       if (!cardId) return;
+
+  
+      heart.style.pointerEvents = "none";
 
       try {
         const res = await fetch("/api/wishlist", {
@@ -43,25 +44,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (res.status === 401) {
           alert("Please login to use wishlist ❤️");
-          return; // ❌ NO UI CHANGE
+          heart.style.pointerEvents = "auto";
+          return; 
         }
 
         const data = await res.json();
 
-        if (data.action === "added") {
-          heart.classList.add("active"); // ❤️ only when stored
+        const allMatchingHearts = document.querySelectorAll(`.wishlist-heart[data-id="${cardId}"]`);
+
+        allMatchingHearts.forEach(matchingHeart => {
+          if (data.action === "added") {
+            matchingHeart.classList.add("active");
+          } 
+          else if (data.action === "removed") {
+            matchingHeart.classList.remove("active");
+
+            
+            const isProfileFavorites = matchingHeart.closest('#favorites');
+            if (isProfileFavorites) {
+              const cardElement = matchingHeart.closest('a.card');
+              if (cardElement) cardElement.remove();
+            }
+          }
+        });
+
+        
+        if (data.action === "removed") {
+          const grid = document.querySelector('.favorites-grid');
+          if (grid && grid.children.length === 0) {
+            grid.parentElement.innerHTML = '<p>No favorite destinations yet.</p>';
+          }
         }
 
-        if (data.action === "removed") {
-          heart.classList.remove("active");
-        }
       } catch (err) {
-        console.error(err);
+        console.error("Wishlist error:", err);
+      } finally {
+       
+        heart.style.pointerEvents = "auto";
       }
     });
   });
 });
-//about page
+
+// --- ABOUT PAGE ---
 (function() {
     const hbBtn = document.getElementById("hbExploreBtn");
 
@@ -71,10 +96,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 })();
-//footer section
+
+// --- FOOTER SECTION ---
 document.querySelectorAll(".footer-title").forEach(title => {
   title.addEventListener("click", () => {
-    if (window.innerWidth > 480) return; // ✅ MATCH CSS
+    if (window.innerWidth > 480) return; // Matches CSS media query
     title.parentElement.classList.toggle("active");
   });
 });
