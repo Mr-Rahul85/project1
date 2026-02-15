@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "start": "nodemon app2.js"
+    "start": "node app2.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
