@@ -1,6 +1,6 @@
 import express from "express";
 import pageAuth from "../middleware/pageAuth.js";
-import User from "../model/user.js"; // 👈 Add this import
+import User from "../model/user.js";
 
 const router = express.Router();
 

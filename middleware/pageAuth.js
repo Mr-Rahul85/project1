@@ -1,22 +1,6 @@
 import jwt from "jsonwebtoken";
 import jwtConfig from "../config/jwt.js";
 
-// const pageAuth = (req, res, next) => {
-
-//   const token = req.cookies?.token;
-
-//   if (!token) {
-//     return res.redirect("/admin/login");
-//   }
-
-//   try {
-//     const decoded = jwt.verify(token, jwtConfig.secret);
-//     req.user = decoded;
-//     next();
-//   } catch (err) {
-//     return res.redirect("/admin/login");
-//   }
-// };
 const pageAuth = (req, res, next) => {
 
   console.log("COOKIES:", req.cookies);

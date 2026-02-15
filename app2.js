@@ -29,6 +29,7 @@ import adminRoute from "./routes/adminRoute.js";
 import currentUser from "./middleware/currentUser.js";
 import forgetPass from "./routes/forgetPassword.js";
 import resetPass from "./routes/reset-password.js";
+import bookingRequest from "./routes/bookingRequest.js";
 import path from "path";
 import { fileURLToPath } from "url";
 const app = express();
@@ -83,6 +84,7 @@ app.use("/feedback", feedbackRoute);
 app.use("/booking", bookingRoutes);
 app.use("/forgot-password", forgetPass);
 app.use("/reset-password",resetPass);
+app.use("/admin/booking-request", bookingRequest);
 
 // HOME
 app.get("/", async (req, res) => {

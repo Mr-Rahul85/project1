@@ -5,6 +5,7 @@ const router = express.Router();
 router.get("/video", async (req, res) => {
   try {
     const videos = await Post.find({ mediaType: "video" });
+    
    
     res.render("pages/video", { videos, title: "Videos" });
   } catch (error) {

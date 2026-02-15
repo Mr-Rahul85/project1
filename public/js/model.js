@@ -57,7 +57,6 @@ document.querySelectorAll(".toggle-password").forEach((icon) => {
   });
 });
 
-
 const formsToPrevent = [signInForm, signUpForm, forgotPassForm].filter(Boolean);
 
 formsToPrevent.forEach((form) => {
@@ -118,8 +117,8 @@ if (signUpForm) {
     e.preventDefault();
 
     if (errorMsg1) {
-        errorMsg1.innerText = "";
-        errorMsg1.style.color = "red"; 
+      errorMsg1.innerText = "";
+      errorMsg1.style.color = "red";
     }
 
     const nameInput = signUpForm.querySelector('input[type="text"]');
@@ -144,7 +143,6 @@ if (signUpForm) {
       const result = await response.json();
 
       if (response.status === 201) {
-
         alert(result.message || "User registered successfully!");
 
         signUpForm.reset();
@@ -157,19 +155,17 @@ if (signUpForm) {
           loginWrapper.classList.remove("hidden-form");
         }
       } else {
-
         if (errorMsg1) {
-            errorMsg1.innerText = result.message || "Registration failed";
+          errorMsg1.innerText = result.message || "Registration failed";
         }
       }
     } catch (error) {
       console.error("Error:", error);
-    
+
       if (errorMsg1) {
         errorMsg1.innerText = "Something went wrong. Please try again.";
       }
     }
-    
   });
 }
 
@@ -177,11 +173,9 @@ if (forgotPassForm) {
   forgotPassForm.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    
     const emailInput = forgotPassForm.querySelector('input[type="email"]');
     const submitBtn = forgotPassForm.querySelector('button[type="submit"]');
-    
-    
+
     const originalBtnText = submitBtn ? submitBtn.innerText : "Reset Password";
     if (submitBtn) {
       submitBtn.innerText = "Sending...";
@@ -193,7 +187,6 @@ if (forgotPassForm) {
     };
 
     try {
-      
       const response = await fetch("/forgot-password", {
         method: "POST",
         headers: {
@@ -205,11 +198,14 @@ if (forgotPassForm) {
       const result = await response.json();
 
       if (response.ok || result.success) {
-        alert(result.message || "A password reset link has been sent to your email!");
-        
+        showToast(
+          result.message ||
+            "A password reset link has been sent to your email!",
+          "success",
+        );
+
         forgotPassForm.reset();
 
-        
         if (
           typeof hideAll === "function" &&
           typeof loginWrapper !== "undefined"
@@ -218,18 +214,54 @@ if (forgotPassForm) {
           loginWrapper.classList.remove("hidden-form");
         }
       } else {
-        
-        alert(result.message || "Failed to send reset email.");
+        showToast(result.message || "Failed to send reset email.", "error");
       }
     } catch (error) {
       console.error("Forgot Password Error:", error);
-      alert("Something went wrong. Please try again later.");
+      showToast("Something went wrong. Please try again later.", "error");
     } finally {
-      
       if (submitBtn) {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
       }
     }
   });
+}
+//toast popup animation
+function showToast(message, type = "success") {
+  const container = document.getElementById("toast-container");
+  if (!container) return;
+
+  const toast = document.createElement("div");
+
+  const baseClasses =
+    "flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg text-white text-sm font-medium transform transition-all duration-300 opacity-0 translate-y-2";
+
+  const typeClasses =
+    type === "success"
+      ? "bg-green-500"
+      : type === "error"
+        ? "bg-red-500"
+        : "bg-gray-800";
+
+  toast.className = `${baseClasses} ${typeClasses}`;
+  toast.innerHTML = `
+    <span>${message}</span>
+    <button class="ml-auto text-white/80 hover:text-white">&times;</button>
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.classList.remove("opacity-0", "translate-y-2");
+  }, 10);
+
+  const removeToast = () => {
+    toast.classList.add("opacity-0", "translate-y-2");
+    setTimeout(() => toast.remove(), 300);
+  };
+
+  setTimeout(removeToast, 3000);
+
+  toast.querySelector("button").addEventListener("click", removeToast);
 }
