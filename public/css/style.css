@@ -24,7 +24,7 @@
 }
 
 body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI",'Comic Neue', Tahoma, Geneva, Verdana, cursive, sans-serif;
   overflow-x: hidden;
   background-color: var(--bg-light);
   width: 100%;
@@ -576,7 +576,7 @@ nav {
 }
 
 .bhojpur {
-  font-family: cursive;
+  font-family: cursive, sans-serif,'Comic Neue';
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   margin-bottom: 1.5rem;
   line-height: 1.3;

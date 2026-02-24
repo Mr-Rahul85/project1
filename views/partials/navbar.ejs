@@ -13,7 +13,10 @@
 
   <% if (isAdmin) { %>
     <li>
-      <a href="/admin/booking-request" class="nav-link">Booking Request</a>
+      <a href="/admin/booking-request" class="nav-link" style="margin-right: 15px; font-weight: bold; color: #007bff;">Booking Request</a>
+    </li>
+    <li>
+      <a href="/admin/feedback&contact" class="nav-link" style="margin-right: 15px; font-weight: bold; color: #007bff;">Feedback & Contact</a>
     </li>
         <% } else { %>
           <li><a href="/about" class="nav-link">About</a></li>
@@ -24,8 +27,8 @@
 
           <li>
         <% if (isAdmin) { %>
-          <a href="/upload" class="nav-profile-link" title="Admin Dashboard" style="margin-right: 15px; font-weight: bold; color: #007bff;">
-            Admin Panel
+          <a href="/upload" class="nav-link" title="Admin Dashboard" style="margin-right: 15px; font-weight: bold; color: #007bff;">
+            Upload Section
           </a>
         <% } else if (isLoggedIn) { %>
           <a href="/profile" class="nav-profile-link" title="Profile">

@@ -3,7 +3,6 @@ import "dotenv/config";
 import connectDB from "./config/db.js";
 import cloudinary from "./config/cloudinary.js";
 import Post from "./model/post.js";
-import User from "./model/user.js";
 import Destination from "./model/destinations.js";
 import cookieParser from "cookie-parser";
 import session from "express-session";
@@ -30,6 +29,7 @@ import currentUser from "./middleware/currentUser.js";
 import forgetPass from "./routes/forgetPassword.js";
 import resetPass from "./routes/reset-password.js";
 import bookingRequest from "./routes/bookingRequest.js";
+import feedback_contact from "./routes/feedback&contact.js";
 import path from "path";
 import { fileURLToPath } from "url";
 const app = express();
@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   session({
-    name: "travel.sid", // custom cookie name
+    name: "travel.sid", 
     secret: process.env.SESSION_SECRET || "superSecretKey",
     resave: false,
     saveUninitialized: false,
@@ -55,8 +55,8 @@ app.use(
     }),
     cookie: {
       httpOnly: true,
-      secure: false, // true only in HTTPS
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      secure: false,
+      maxAge: 1000 * 60 * 60 * 24, 
     },
   }),
 );
@@ -83,12 +83,14 @@ app.use("/about", aboutRoute);
 app.use("/feedback", feedbackRoute);
 app.use("/booking", bookingRoutes);
 app.use("/forgot-password", forgetPass);
-app.use("/reset-password",resetPass);
+app.use("/reset-password", resetPass);
 app.use("/admin/booking-request", bookingRequest);
+app.use("/admin/feedback&contact", feedback_contact);
 
 // HOME
 app.get("/", async (req, res) => {
   const posts = await Post.find({ mediaType: "image" });
+  
 
   const images = {};
 

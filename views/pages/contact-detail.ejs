@@ -1,0 +1,31 @@
+<div class="max-w-3xl mx-auto p-4 md:p-8">
+    <a href="/admin/feedback&contact" class="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800 mb-6 transition-colors duration-200">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to Dashboard
+    </a>
+
+    <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
+        <div class="bg-gray-50 border-b border-gray-200 p-6">
+            <h1 class="text-2xl font-bold text-gray-900 mb-1"><%= contact.subject %></h1>
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mt-4">
+                <div>
+                    <p class="text-sm font-medium text-gray-900"><%= contact.name %></p>
+                    <a href="mailto:<%= contact.email %>" class="text-sm text-blue-600 hover:underline"><%= contact.email %></a>
+                </div>
+                <div class="text-right">
+                    <p class="text-xs text-gray-500">Received on:</p>
+                    <p class="text-sm font-medium text-gray-700">
+                        <%= new Date(contact.createdAt).toLocaleString() %>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Message</h3>
+            <div class="bg-gray-50 rounded-lg p-5 text-gray-700 whitespace-pre-wrap leading-relaxed border border-gray-100">
+                <%= contact.message %>
+            </div>
+        </div>
+    </div>
+</div>

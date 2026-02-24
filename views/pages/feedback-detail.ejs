@@ -1,0 +1,53 @@
+<div class="max-w-4xl mx-auto p-4 md:p-8">
+    <a href="/admin/feedback&contact      " class="inline-flex items-center text-sm font-medium text-indigo-600 hover:text-indigo-800 mb-6 transition-colors duration-200">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        Back to Dashboard
+    </a>
+
+    <div class="bg-white rounded-xl shadow-md border border-gray-100 overflow-hidden">
+        <div class="bg-gray-50 border-b border-gray-200 p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <span class="inline-block px-3 py-1 mb-2 text-sm font-semibold rounded-full 
+                    <%= feedback.type === 'Bug Report' ? 'bg-red-100 text-red-700' : 
+                        feedback.type === 'Feature Request' ? 'bg-green-100 text-green-700' : 
+                        'bg-purple-100 text-purple-700' %>">
+                    <%= feedback.type %>
+                </span>
+                <p class="text-sm text-gray-600 mt-1">
+                    From: <%- feedback.email ? `<a href="mailto:${feedback.email}" class="text-indigo-600 hover:underline">${feedback.email}</a>` : '<span class="italic text-gray-400">Anonymous User</span>' %>
+                </p>
+            </div>
+            
+            <div class="flex flex-col items-end">
+                <div class="flex items-center gap-1 bg-white px-3 py-1.5 rounded-lg border border-gray-200 shadow-sm">
+                    <span class="text-sm font-medium text-gray-600 mr-1">Rating:</span>
+                    <span class="text-yellow-500 font-bold text-lg"><%= feedback.rating %></span>
+                    <span class="text-gray-400 text-sm">/ 5</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-2">
+                    <%= new Date(feedback.createdAt).toLocaleString() %>
+                </p>
+            </div>
+        </div>
+
+        <div class="p-6">
+            <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">Feedback Details</h3>
+            <div class="bg-gray-50 rounded-lg p-5 text-gray-700 whitespace-pre-wrap leading-relaxed border border-gray-100 mb-8">
+                <%= feedback.message %>
+            </div>
+
+            <% if (feedback.screenshot && feedback.screenshot.mediaUrl) { %>
+                <h3 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    Attached Screenshot
+                </h3>
+                <div class="rounded-lg border border-gray-200 overflow-hidden bg-gray-100 flex justify-center">
+                    <a href="<%= feedback.screenshot.mediaUrl %>" target="_blank" rel="noopener noreferrer" class="block w-full cursor-zoom-in">
+                        <img src="<%= feedback.screenshot.mediaUrl %>" alt="User provided screenshot" class="max-w-full h-auto object-contain max-h-[600px] mx-auto hover:opacity-95 transition-opacity">
+                    </a>
+                </div>
+                <p class="text-xs text-gray-400 text-center mt-2">Click image to view full size</p>
+            <% } %>
+        </div>
+    </div>
+</div>
